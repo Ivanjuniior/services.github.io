@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Status de Serviços</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+        .service-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .status-btn {
+            transition: background-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Dashboard de Status de Serviços</h1>
+            <p class="text-gray-600 mt-2">Links centralizados para verificar o status de serviços online.</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="mb-8 max-w-2xl mx-auto">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="text-gray-400"></i>
+                </div>
+                <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Buscar serviço..." class="w-full bg-white border border-gray-300 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Category: Produtividade e E-mail -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="briefcase" class="mr-2 text-blue-600"></i>Produtividade e E-mail</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Google Workspace</span><a href="https://www.google.com/appsstatus/dashboard/" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Microsoft 365 / Outlook</span><a href="https://status.office365.com/" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Apple iCloud & Serviços</span><a href="https://www.apple.com/support/systemstatus/" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Dropbox</span><a href="https://status.dropbox.com" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Zoom</span><a href="https://status.zoom.us/" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Skype</span><a href="https://support.skype.com/pt-br/status/" target="_blank" class="status-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category: Cloud e Infraestrutura -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="cloud" class="mr-2 text-green-600"></i>Cloud e Infraestrutura</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Google Cloud</span><a href="https://status.cloud.google.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>AWS (Amazon)</span><a href="https://status.aws.amazon.com/" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Microsoft Azure</span><a href="https://azure.status.microsoft/pt-br/status" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>IBM Cloud</span><a href="https://cloud.ibm.com/status" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>DigitalOcean</span><a href="https://status.digitalocean.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Linode</span><a href="https://status.linode.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>OVH</span><a href="https://status.ovh.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Vultr</span><a href="https://status.vultr.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Alibaba Cloud</span><a href="https://status.alibabacloud.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Tencent Cloud</span><a href="https://status.cloud.tencent.com" target="_blank" class="status-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category: Desenvolvimento e Hospedagem -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="code" class="mr-2 text-purple-600"></i>Desenvolvimento e Hospedagem</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>GitHub</span><a href="https://www.githubstatus.com" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>GitLab</span><a href="https://status.gitlab.com" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Heroku</span><a href="https://status.heroku.com" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Netlify</span><a href="https://www.netlify-status.com/" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Vercel</span><a href="https://www.vercel-status.com/" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Locaweb</span><a href="http://statusblog.locaweb.com.br" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>HostGator</span><a href="http://status.hostgator.com.br" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>SkyMail</span><a href="http://status.skymail.com.br" target="_blank" class="status-btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category: Redes, CDN e Segurança -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="shield" class="mr-2 text-red-600"></i>Redes, CDN e Segurança</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Cloudflare</span><a href="https://www.cloudflarestatus.com" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Akamai</span><a href="https://www.akamaistatus.com" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Fastly</span><a href="https://status.fastly.com" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>FortiCloud</span><a href="https://status.forticloud.com" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>IX Brasil (PTT)</span><a href="https://status.ix.br" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>UPX</span><a href="https://status.upx.com" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>CenturyLink (Level3)</span><a href="https://status.ctl.io/" target="_blank" class="status-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category: Gaming e Entretenimento -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="gamepad-2" class="mr-2 text-yellow-600"></i>Gaming e Entretenimento</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Xbox Live</span><a href="https://support.xbox.com/xbox-live-status" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>PlayStation Network</span><a href="https://status.playstation.com/" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Steam</span><a href="https://steamstat.us" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>EA (Electronic Arts)</span><a href="https://help.ea.com/br/ea-inc/server-status/" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Riot Games</span><a href="https://status.riotgames.com" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Netflix</span><a href="https://help.netflix.com/pt/is-netflix-down" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Globoplay (Teste)</span><a href="https://browserreport.globo.com/" target="_blank" class="status-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Category: Redes Sociais -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="users" class="mr-2 text-pink-600"></i>Redes Sociais</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Meta (Facebook, Instagram)</span><a href="https://metastatus.com" target="_blank" class="status-btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Category: Verificação Geral -->
+            <div class="service-category-card">
+                <div class="bg-white rounded-lg shadow-md p-6 service-card">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i data-lucide="search-check" class="mr-2 text-teal-600"></i>Verificação Geral</h2>
+                    <ul class="space-y-3 service-list">
+                        <li class="flex justify-between items-center service-item"><span>Downdetector (BR)</span><a href="https://downdetector.com.br/" target="_blank" class="status-btn bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Downdetector (USA)</span><a href="https://downdetector.com/" target="_blank" class="status-btn bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Is It Down Right Now?</span><a href="https://www.isitdownrightnow.com/" target="_blank" class="status-btn bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                        <li class="flex justify-between items-center service-item"><span>Outage.Report</span><a href="https://outage.report/" target="_blank" class="status-btn bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Ver Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- No results message -->
+        <div id="no-results" class="hidden text-center mt-8">
+            <p class="text-gray-600 text-lg">Nenhum serviço encontrado.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 mt-8">
+        <p class="text-gray-500 text-sm">Dashboard criado para centralizar links de status.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Function to filter services based on search input
+        function filterServices() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('services-grid');
+            const categoryCards = grid.getElementsByClassName('service-category-card');
+            let anyCategoryVisible = false;
+
+            for (let i = 0; i < categoryCards.length; i++) {
+                const card = categoryCards[i];
+                const serviceList = card.querySelector('.service-list');
+                const items = serviceList.getElementsByClassName('service-item');
+                let hasVisibleItems = false;
+
+                for (let j = 0; j < items.length; j++) {
+                    const item = items[j];
+                    const serviceName = item.getElementsByTagName('span')[0];
+                    if (serviceName) {
+                        const txtValue = serviceName.textContent || serviceName.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            item.style.display = "";
+                            hasVisibleItems = true;
+                        } else {
+                            item.style.display = "none";
+                        }
+                    }
+                }
+
+                if (hasVisibleItems) {
+                    card.style.display = "";
+                    anyCategoryVisible = true;
+                } else {
+                    card.style.display = "none";
+                }
+            }
+            
+            // Show or hide the "no results" message
+            const noResults = document.getElementById('no-results');
+            if(anyCategoryVisible) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
